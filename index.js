@@ -15,3 +15,17 @@ mongoose.connect('mongodb://localhost/playground')
         date: {type: Date, default: Date.now },
         isPublished: Boolean
     });
+
+//classes,objects
+//course,nodeCourse
+//compile that schema to model
+//first argument is singlar name of the db collection
+
+const Course= mongoose.model('Course',courseSchema)
+//create an instance of Course class
+const course = new Course({
+    name: 'Node.js Course',
+    author: "Nipuni",
+    tags: ['node','backend'],
+    isPublished: true
+})  
