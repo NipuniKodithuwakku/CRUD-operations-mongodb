@@ -44,8 +44,11 @@ async function createCourse() {
 //retrieve database from the database
 async function getCourses() {
   //return a document
-  const courses = await Course.find();
+  const courses = await Course.find({ author: "Nipuni", isPublished: true })
+    .limit(10)
+    .sort({ name: 1 })
+    .select({ name: 1, tags: 1 });
   console.log(courses);
 }
-createCourse();
+// createCourse();
 getCourses();
