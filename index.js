@@ -41,4 +41,11 @@ async function createCourse() {
   console.log(result);
 }
 
+//retrieve database from the database
+async function getCourses() {
+  //return a document
+  const courses = await Course.find();
+  console.log(courses);
+}
 createCourse();
+getCourses();
