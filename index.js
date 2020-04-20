@@ -23,9 +23,22 @@ mongoose.connect('mongodb://localhost/playground')
 
 const Course= mongoose.model('Course',courseSchema)
 //create an instance of Course class
-const course = new Course({
+
+//since we use async we must put await into async function
+async function createCourse(){
+    const course = new Course({
     name: 'Node.js Course',
     author: "Nipuni",
     tags: ['node','backend'],
     isPublished: true
 })  
+
+//saving the course to the document in database
+//since this is an asynchronize activity we must use "await" keyword
+
+const result = await course.save();
+console.log(result);
+
+}
+
+createCourse();
