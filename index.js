@@ -44,7 +44,10 @@ async function createCourse() {
 //retrieve database from the database
 async function getCourses() {
   //return a document
-  const courses = await Course.find({ author: "Nipuni", isPublished: true })
+  const courses = await Course
+    // .find({ author: "Nipuni", isPublished: true })
+    // .find({price: {$gte: 10,$lte:20}})
+    .find({price:{$in[10,15,20]} })
     .limit(10)
     .sort({ name: 1 })
     .select({ name: 1, tags: 1 });
