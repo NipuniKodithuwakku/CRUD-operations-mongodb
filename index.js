@@ -43,6 +43,9 @@ async function createCourse() {
 
 //retrieve database from the database
 async function getCourses() {
+const pageNumber = 2;
+const pageSize = 10;
+
   //return a document
   const courses = await Course
     .find({ author: "Nipuni", isPublished: true })
@@ -58,7 +61,13 @@ async function getCourses() {
     .find({ author: /Nipuni$/i })
     //contain in any position of the word
     .find({ author: /.*Nipuni.*/i })
-    .limit(10)
+
+
+    //pagination
+    //in real world
+    //api/courses?pageNumber=2&pageSize=10
+    .skip((pageNumber-1)*pageSize})
+    .limit(pageSize)
     .sort({ name: 1 })
     .select({ name: 1, tags: 1 })
     .count();
