@@ -45,23 +45,23 @@ async function createCourse() {
 async function getCourses() {
   //return a document
   const courses = await Course
-    // .find({ author: "Nipuni", isPublished: true })
-    // .find({price: {$gte: 10,$lte:20}})
-    // .find({price:{$in[10,15,20]} })
-    // .find()
-    // // .or([{author: "Nipuni"},{isPublished: true}])
-    // .and([{author: "Nipuni"},{isPublished: true}])
-
+    .find({ author: "Nipuni", isPublished: true })
+    .find({price: {$gte: 10,$lte:20}})
+    .find({price:{$in[10,15,20]} })
+    .find()
+    // .or([{author: "Nipuni"},{isPublished: true}])
+    .and([{author: "Nipuni"},{isPublished: true}])
 
     //starts with Nipuni
-    .find({author: /^Nipuni/})
+    .find({ author: /^Nipuni/ })
     //ends with Nipuni i represent the case sensivity
-    .find({author: /Nipuni$/i})
+    .find({ author: /Nipuni$/i })
     //contain in any position of the word
-    .find({author: /.*Nipuni.*/i})
+    .find({ author: /.*Nipuni.*/i })
     .limit(10)
     .sort({ name: 1 })
-    .select({ name: 1, tags: 1 });
+    .select({ name: 1, tags: 1 })
+    .count();
   console.log(courses);
 }
 // createCourse();
