@@ -1,4 +1,4 @@
-//connect mongo db
+//load mongoose
 const mongoose = require("mongoose");
 
 mongoose
