@@ -31,16 +31,29 @@ async function getCourses(){
     // console.log(courses)
 }
 
-async function run(){
+async function getCourses2(){
+    return await Course
+    .find({isPublished: true,tags: {$in:['frontend','backend']}})
+    .sort({price: -1})
+    .select({name: 1, author: 1})
+}
+
+async function run1(){
     const courses = await getCourses();
     console.log(courses);
 
 }
 
+async function run2(){
+    const courses = await getCourses2();
+    console.log(courses);
+}
+
 
 // getCourses();
 
-run();
+run1();
+run2();
 // Course
 // .find({isPublished:true, tags:'backend'})
 // .sort('name')//accending
