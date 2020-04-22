@@ -19,8 +19,8 @@ const courseSchema = new mongoose.Schema({
 
 //classes,objects
 //course,nodeCourse
-//compile that schema to model
-//first argument is singlar name of the db collection
+//compile that schema into model
+//first argument is singler name of the db collection
 
 const Course = mongoose.model("Course", courseSchema);
 //create an instance of Course class
@@ -41,7 +41,7 @@ async function createCourse() {
   console.log(result);
 }
 
-//retrieve database from the database
+//retrieve data from the database
 async function getCourses() {
 const pageNumber = 2;
 const pageSize = 10;
