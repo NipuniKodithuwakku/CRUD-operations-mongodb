@@ -20,7 +20,7 @@ const courseSchema = new mongoose.Schema({
 //classes,objects
 //course,nodeCourse
 //compile that schema into model
-//first argument is singler name of the db collection
+//model's first argument is singler name of the db collection
 
 const Course = mongoose.model("Course", courseSchema);
 //create an instance of Course class
@@ -43,17 +43,16 @@ async function createCourse() {
 
 //retrieve data from the database
 async function getCourses() {
-const pageNumber = 2;
-const pageSize = 10;
+  const pageNumber = 2;
+  const pageSize = 10;
 
   //return a document
-  const courses = await Course
-    .find({ author: "Nipuni", isPublished: true })
-    .find({price: {$gte: 10,$lte:20}})
-    .find({price:{$in[10,15,20]} })
+  const courses = await Course.find({ author: "Nipuni", isPublished: true })
+    .find({ price: { $gte: 10, $lte: 20 } })
+    // .find({price:{$in[10,15,20]} })
     .find()
     // .or([{author: "Nipuni"},{isPublished: true}])
-    .and([{author: "Nipuni"},{isPublished: true}])
+    .and([{ author: "Nipuni" }, { isPublished: true }])
 
     //starts with Nipuni
     .find({ author: /^Nipuni/ })
@@ -62,11 +61,10 @@ const pageSize = 10;
     //contain in any position of the word
     .find({ author: /.*Nipuni.*/i })
 
-
     //pagination
     //in real world
     //api/courses?pageNumber=2&pageSize=10
-    .skip((pageNumber-1)*pageSize})
+    // .skip((pageNumber-1)*pageSize})
     .limit(pageSize)
     .sort({ name: 1 })
     .select({ name: 1, tags: 1 })
@@ -75,3 +73,28 @@ const pageSize = 10;
 }
 // createCourse();
 getCourses();
+
+async function updateCourse(id) {
+  //approach:query first
+  //find by id
+  //modify its properties
+  //save()
+
+  const course = await Course.findById(id);
+  if (!course) return;
+
+  //update properties-method 1
+  course.isPublished = true;
+  course.author = "Anton Jkob";
+
+  // //method-2
+  // course.set({
+  //   ispublished:true,
+  //   author:'Anton Jkob'
+  // });
+
+  const result = await course.save();
+  console.log(result);
+}
+
+updateCourse("5a68fde3f09ad7646ddec17e");

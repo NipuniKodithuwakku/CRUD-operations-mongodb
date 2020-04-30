@@ -14,21 +14,19 @@ const courseSchema = new mongoose.Schema({
   price: Number,
 });
 
-//create a model
+//create a model(like a class)
 const Course = mongoose.model("Course", courseSchema);
 
-async function getCourses(){
-    return await Course
-        .find({isPublished: true})
-        .or([{tags:'frontend'},{tags:'backend'}])
-        .sort({price: -1})
-        .select('name author price') 
+async function getCourses() {
+  return await Course.find({ isPublished: true })
+    .or([{ tags: "frontend" }, { tags: "backend" }])
+    .sort({ price: -1 })
+    .select("name author price");
 }
 
-async function run(){
-    const result = await getCourses();
-    console.log(result);
+async function run() {
+  const result = await getCourses();
+  console.log(result);
 }
 
 run();
-
