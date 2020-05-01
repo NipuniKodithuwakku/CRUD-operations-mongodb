@@ -24,29 +24,21 @@ const courseSchema = new mongoose.Schema({
 //model's first argument is singler name of the db collection
 
 const Course = mongoose.model("Course", courseSchema);
-//create an instance of Course class
-
-async function updateCourse(id) {
-  //approach:query first
-  //find by id
-  //modify its properties
-  //save()
-
-  const course = await Course.findById(id);
-  if (!course) return;
-
-  //update properties-method 1
-  course.isPublished = true;
-  course.author = "Anton Jkob";
-
-  // //method-2
-  // course.set({
-  //   ispublished:true,
-  //   author:'Anton Jkob'
-  // });
-
-  const result = await course.save();
+// async function updateCourse(id) {
+//   const result = await Course.update(
+//     { _id: id },
+//     {
+//       $set: {
+//         author: "Nipuni",
+//         isPublished: false,
+//       },
+//     }
+//   );
+//   console.log(result);
+// }
+// updateCourse("5a68ff090c553064a218a547");
+async function deleteCourse(id) {
+  const result = await Course.deleteOne({ _id: id });
   console.log(result);
 }
-
-updateCourse("5a68fdc3615eda645bc6bdec");
+deleteCourse("5a68ff090c553064a218a547");

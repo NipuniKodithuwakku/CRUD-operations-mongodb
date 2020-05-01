@@ -1,3 +1,5 @@
+//create an instance of Course class
+
 //course create
 //since we use async we must put await into async function
 async function createCourse() {
@@ -47,3 +49,28 @@ async function getCourses() {
 }
 // createCourse();
 getCourses();
+
+async function updateCourse(id) {
+  //approach:query first
+  //find by id
+  //modify its properties
+  //save()
+
+  const course = await Course.findById(id);
+  if (!course) return;
+
+  //update properties-method 1
+  course.isPublished = true;
+  course.author = "Anton Jkob";
+
+  // //method-2
+  // course.set({
+  //   ispublished:true,
+  //   author:'Anton Jkob'
+  // });
+
+  const result = await course.save();
+  console.log(result);
+}
+
+updateCourse("5a68ff090c553064a218a547");
