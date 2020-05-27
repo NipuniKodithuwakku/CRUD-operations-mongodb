@@ -4,3 +4,11 @@ mongoose
   .connect("mongodb://localhost/text")
   .then(() => console.log("connected to the mongodb"))
   .catch((err) => console.error("could not connect to the mongodb", err));
+
+const courseSchema = new mongoose.Schema({
+  name: String,
+  author: String,
+  tags: [String],
+  date: Date,
+  isPublished: Boolean,
+});
