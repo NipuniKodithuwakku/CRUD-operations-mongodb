@@ -7,6 +7,7 @@ mongoose
 
 const courseSchema = new mongoose.Schema({
   name: String,
+  name: { type: String, required: true },
   author: String,
   tags: [String],
   date: { type: Date, default: Date.now },
@@ -16,14 +17,17 @@ const Course = mongoose.model("Course", courseSchema);
 
 async function createCourse() {
   const course = new Course({
-    name: "Angular.js course",
+    // name: "Angular.js course",
     author: "Mosh",
     tags: ["Angular", "frontend"],
     isPublished: true,
   });
-
-  const result = await course.save();
-  console.log(result);
+  try {
+    const result = await course.save();
+    console.log(result);
+  } catch (ex) {
+    console.log(ex.message);
+  }
 }
 async function getCourses() {
   // const pageNumber = 2;
@@ -43,4 +47,5 @@ async function getCourses() {
 
   console.log(courses);
 }
-getCourses();
+// getCourses();
+createCourse();
