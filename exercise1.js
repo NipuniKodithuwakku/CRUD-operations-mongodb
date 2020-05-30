@@ -3,7 +3,12 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/mongo-exercises");
 
 const courseSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, maxlength: 255, minlength: 5 },
+  category: {
+    type: String,
+    required: true,
+    enum: ["web", "mobile", "network"],
+  },
   author: String,
   tags: [String],
   date: Date,
@@ -19,11 +24,12 @@ const Course = mongoose.model("Course", courseSchema);
 
 async function createCourse() {
   const course = new Course({
-    // name: "Node.js course",
+    name: "Node.js course",
+    category: "_",
     author: "Mosh",
     tags: ["Angular", "frontend"],
     isPublished: true,
-    // price:15,
+    price: 15,
   });
   try {
     const result = await course.save();
