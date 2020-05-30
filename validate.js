@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost/text")
+  .connect("mongodb://localhost/playground")
   .then(() => console.log("connected to the mongodb"))
   .catch((err) => console.error("could not connect to the mongodb", err));
 
 const courseSchema = new mongoose.Schema({
-  name: String,
+  //   name: String,
   name: { type: String, required: true },
   author: String,
   tags: [String],
